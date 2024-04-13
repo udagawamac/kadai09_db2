@@ -19,16 +19,11 @@ $stmt->bindValue(':email',  $email,  PDO::PARAM_STR);  //Integer（数値の場�
 $stmt->bindValue(':color',  $color,  PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $status = $stmt->execute(); //true or false
 
-//４．データ登録処理後
+//４．データ登録処理後、select.phpへジャンプ
 if($status==false){
-  //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
-  $error = $stmt->errorInfo();
-  exit("SQL_ERROR:".$error[2]);
+  sql_error($stmt);
 }else{
-  //５．index.phpへリダイレクト
-  // header("Location: index2.php");\
-  //５．select4.phpへリダイレクト
-  header("Location: select.php");
-  exit();
+redirect("select.php");
 }
+
 ?>
